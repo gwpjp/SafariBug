@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC>
+<html>
+	<head>
+    	<meta charset="utf-8">
+    	<link rel="stylesheet" href="style.css" title="style">
+	</head>
+	<body style="width: 80%; margin-left: 10%">
+		<p> Safari is sometimes unable to change the style of an external style sheet because it changes the selectorText of all selectors to lower case.  If I try to change a CSS tag that is written in Camel Case by clicking on the corresponding button, the code will not work.  Therefore, the block does not change color.  (Note the output to the console. It shows that the selector class name has been converted to all lower case.)  However, if I try to change a CSS tag that is written in all lower case by clicking on its corresponding button, the code works and the block changes color.  Both buttons work on other browsers such as Chrome and Firefox. </p>
+		<br>
+		<hr>
+		<br>  
+		<div style="display: inline-flex; justify-content: center; width: 100%">
+			<div style="text-align: center">
+				<b>Class = ".redBox"</b>
+
+				<div style="height: 50px; width: 50px; margin: 10px" class="redBox"></div>
+
+				<button style="height: 50px; margin: 10px" onclick="changeCamelCase()">Change Camel Case</button>
+			</div>
+			
+			<hr>
+
+			<div style="text-align: center">
+				<b>Class = ".red-box"</b>
+
+				<div style="height: 50px; width: 50px; margin: 10px" class="red-box"></div>
+				
+				<button style="height: 50px; margin: 10px" onclick="changeLowerCase()">Change Lower Case</button>
+			</div>
+		</div>
+
+		<script>
+			function changeCamelCase() {
+				console.log(document.styleSheets[0]);
+				console.log(document.styleSheets[0].cssRules[0]);
+				console.log(document.styleSheets[0].cssRules[0].selectorText);
+				var rules = document.styleSheets[0].cssRules;
+				for (var i = 0; i < rules.length; i++) {
+					if (rules[i].selectorText == ".redBox") {
+						rules[i].style.backgroundColor = "red";
+					} 
+				}
+			}
+
+			function changeLowerCase() {
+
+				console.log(document.styleSheets[0]);
+				console.log(document.styleSheets[0].cssRules[1]);
+				console.log(document.styleSheets[0].cssRules[1].selectorText);
+				var rules = document.styleSheets[0].cssRules;
+				for (var i = 0; i < rules.length; i++) {
+					if (rules[i].selectorText == ".red-box") {
+						rules[i].style.backgroundColor = "red";
+					} 
+				}
+
+			}
+
+		</script>
+
+	</body>
+</html>
